@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply m-0 min-h-screen bg-slate-50 text-slate-900 font-sans antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(11, 107, 203, 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(14, 116, 144, 0.08), transparent);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes chat-pop {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-fade-up {
+  animation: fade-up .55s cubic-bezier(.22,1,.36,1) both;
+}
+
+.animate-chat-pop {
+  animation: chat-pop .28s cubic-bezier(.22,1,.36,1) both;
+}
+
+button, a, input, select, textarea {
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+  transition-duration: 180ms;
+  transition-timing-function: ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+.animate-float-soft { animation: float-soft 4s ease-in-out infinite; }
+
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 -35%;
+  width: 25%;
+  transform: skewX(-18deg);
+  background: rgba(255,255,255,.24);
+  animation: shimmer 3.8s ease-in-out infinite;
+  pointer-events: none;
+}
