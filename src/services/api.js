@@ -1,8 +1,13 @@
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore.js';
 
+const configuredApiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4001/api/v1';
+const apiBaseUrl = configuredApiUrl.replace(/\/$/, '').endsWith('/api/v1')
+  ? configuredApiUrl.replace(/\/$/, '')
+  : `${configuredApiUrl.replace(/\/$/, '')}/api/v1`;
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4001/api/v1',
+  baseURL: apiBaseUrl,
 });
 
 api.interceptors.request.use((config) => {
